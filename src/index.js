@@ -33,7 +33,7 @@ breedSelect.addEventListener('change', () => {
 
     showLoader();
     hideError();
-  hideCatInfo();
+    hideCatInfo();
 
     fetchCatByBreed(selectedBreedId)
         .then(catData => {
@@ -42,7 +42,6 @@ breedSelect.addEventListener('change', () => {
             <h2>${catData.breed}</h2>
             <p><strong>Description:</strong> ${catData.description}</p>
             <p><strong>Temperament:</strong> ${catData.temperament}</p>
-            
           `;
             showCatInfo();
         })
@@ -55,14 +54,11 @@ breedSelect.addEventListener('change', () => {
 });
     
 function showLoader() {
-    //loader.classList.remove('hidden');
-    document.querySelector('.loader').style.display = 'block';
-      
+  loader.classList.add('active');
 }
     
  function hideLoader() {
-      //loader.classList.add('hidden');
-     document.querySelector('.loader').style.display = 'none';
+      loader.classList.remove('active');
     
     }
 
