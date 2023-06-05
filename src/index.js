@@ -1,5 +1,5 @@
-import { fetchBreeds, fetchCatByBreed} from './cat-api';
-
+import { fetchBreeds, fetchCatByBreed } from './cat-api';
+import SlimSelect from 'slim-select';
 
 const breedSelect = document.querySelector('.breed-select');
 const loader = document.querySelector('.loader');
@@ -15,14 +15,25 @@ fetchBreeds()
   .catch(handleError)
   .finally(hideLoader);
 
+  const slimSelect = new SlimSelect({
+  select: breedSelect,
+  placeholderText: 'Select Breed',
+  allowDeselect: true,
+  closeOnSelect: false,
+  showSearch: true,
+});
+
   breedSelect.addEventListener('change', handleBreedSelectChange);
  
 function mapBreedsToOptions(breeds) {
-  return breeds.map(breed => `<option value="${breed.id}">${breed.name}</option>`);
+  return breeds.map(breed => ({
+    text: breed.name,
+    value: breed.id
+  }));
 }
 
 function renderBreedOptions(breedOptions) {
-  breedSelect.innerHTML = breedOptions.join('');
+  slimSelect.setData(breedOptions);
 }
 
 function handleError(error) {
